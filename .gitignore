@@ -1,0 +1,10 @@
+/node_modules
+/archived
+npm-debug.log
+
+# IntelliJ
+*.iml
+/.idea
+/.env
+/.DS_Store
+/client2
