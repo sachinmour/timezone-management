@@ -19,7 +19,7 @@ const deleteUser = ({ userId }) =>
                     type: DELETE_USER_ERROR,
                     payload: err
                 });
-                return err;
+                throw err;
             });
     };
 

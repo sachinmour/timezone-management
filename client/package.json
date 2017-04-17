@@ -5,16 +5,22 @@
   "dependencies": {
     "axios": "^0.16.1",
     "lodash": "^4.17.4",
+    "material-ui": "^0.17.4",
+    "moment-timezone": "^0.5.13",
     "react": "^15.5.3",
     "react-dom": "^15.5.3",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.0",
     "redux-form": "^6.6.3",
     "redux-form-material-ui": "^4.2.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^1.4.5",
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "react-scripts": "0.9.5",

@@ -9,6 +9,7 @@ import {
     DELETE_USER_SUCCESS,
     DELETE_USER_ERROR
 } from '../actions/types';
+import { handleError } from './utils';
 
 const defaultState = {
     pending: false,
@@ -61,7 +62,7 @@ const usersReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 pending: false,
-                error: action.payload
+                error: handleError(action.payload)
             };
         default:
             return state;

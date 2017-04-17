@@ -3,6 +3,10 @@ import { push } from 'react-router-redux';
 import { LOGIN_SUCCESS, LOGOUT } from '../types';
 
 const verifyUser = dispatch => {
+    if (!sessionStorage.getItem('jwtToken')) {
+        dispatch(push('/login'));
+        return Promise.resolve();
+    }
     return new Promise(resolve => {
         axios()
             .get('/verify')

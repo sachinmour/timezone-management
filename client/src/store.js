@@ -14,10 +14,10 @@ export const history = createHistory();
 
 const middlewares = [reduxThunk, routerMiddleware(history)];
 
-if (process.env.NODE_ENV === 'development') {
-    const { logger } = require('redux-logger');
-    middlewares.push(logger);
-}
+// if (process.env.NODE_ENV === 'development') {
+//     const { logger } = require('redux-logger');
+//     middlewares.push(logger);
+// }
 
 // use middleware
 const middleware = applyMiddleware(...middlewares);

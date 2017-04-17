@@ -20,7 +20,7 @@ const getTimezones = ({ userId }) =>
                     type: GET_TIMEZONES_ERROR,
                     payload: err
                 });
-                return err;
+                throw err;
             });
     };
 

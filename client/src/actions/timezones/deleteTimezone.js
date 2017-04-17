@@ -19,7 +19,7 @@ const deleteTimezone = ({ userId, timezoneId }) =>
                     type: DELETE_TIMEZONE_ERROR,
                     payload: err
                 });
-                return err;
+                throw err;
             });
     };
 

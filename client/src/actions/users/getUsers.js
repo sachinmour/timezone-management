@@ -20,7 +20,7 @@ const getUsers = () =>
                     type: GET_USERS_ERROR,
                     payload: err
                 });
-                return err;
+                throw err;
             });
     };
 

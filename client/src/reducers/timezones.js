@@ -12,7 +12,8 @@ import {
     DELETE_TIMEZONE_SUCCESS,
     DELETE_TIMEZONE_ERROR
 } from '../actions/types';
-import { omitBy, keys, get, set } from 'lodash';
+import { handleError } from './utils';
+import { keys, get } from 'lodash';
 
 const defaultState = {
     pending: false,
@@ -21,7 +22,7 @@ const defaultState = {
     value: {}
 };
 
-const usersReducer = (state = defaultState, action) => {
+const timezonesReducer = (state = defaultState, action) => {
     switch (action.type) {
         case GET_TIMEZONES_PENDING:
         case UPDATE_TIMEZONE_PENDING:
@@ -75,10 +76,11 @@ const usersReducer = (state = defaultState, action) => {
         case GET_TIMEZONES_ERROR:
         case UPDATE_TIMEZONE_ERROR:
         case DELETE_TIMEZONE_ERROR:
+        case CREATE_TIMEZONE_ERROR:
             return {
                 ...state,
                 pending: false,
-                error: action.payload
+                error: handleError(action.payload)
             };
         default:
             return state;

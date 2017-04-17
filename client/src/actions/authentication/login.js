@@ -23,7 +23,7 @@ const loginUser = ({ email, password }) =>
                     type: LOGIN_ERROR,
                     payload: err
                 });
-                return err;
+                throw err;
             });
     };
 

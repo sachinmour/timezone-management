@@ -20,7 +20,7 @@ const updateTimezone = ({ name, timezone, userId, timezoneId }) =>
                     type: UPDATE_TIMEZONE_ERROR,
                     payload: err
                 });
-                return err;
+                throw err;
             });
     };
 

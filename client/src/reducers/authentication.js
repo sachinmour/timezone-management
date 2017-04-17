@@ -1,4 +1,5 @@
 import { LOGIN_PENDING, LOGIN_SUCCESS, LOGIN_ERROR, SIGNUP_PENDING, SIGNUP_ERROR } from '../actions/types';
+import { handleError } from './utils';
 
 const defaultState = {
     authenticated: false,
@@ -28,7 +29,7 @@ const authReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 pending: false,
-                error: action.payload
+                error: handleError(action.payload)
             };
         default:
             return state;

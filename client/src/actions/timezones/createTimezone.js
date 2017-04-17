@@ -20,7 +20,7 @@ const createTimezone = ({ name, timezone, userId }) =>
                     type: CREATE_TIMEZONE_ERROR,
                     payload: err
                 });
-                return err;
+                throw err;
             });
     };
 

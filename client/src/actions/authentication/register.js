@@ -23,7 +23,7 @@ const registerUser = ({ email, password, role }) =>
                     type: SIGNUP_ERROR,
                     payload: err
                 });
-                return err;
+                throw err;
             });
     };
 

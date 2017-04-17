@@ -20,7 +20,7 @@ const updateUser = ({ email, password, userId }) =>
                     type: UPDATE_USER_ERROR,
                     payload: err
                 });
-                return err;
+                throw err;
             });
     };
 
