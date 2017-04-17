@@ -10,6 +10,11 @@ const Schema = mongoose.Schema;
 const timezoneSchema = new Schema({
     name: {
         type: String,
+        trim: true,
+        validate: {
+            validator: v => v.length > 0,
+            message: 'Name cannot be empty'
+        },
         required: true
     },
     timezone: {
@@ -17,7 +22,8 @@ const timezoneSchema = new Schema({
         validate: {
             validator: v => !!moment.tz.zone(v),
             message: '{VALUE} is not a valid timezone'
-        }
+        },
+        required: true
     }
 });
 

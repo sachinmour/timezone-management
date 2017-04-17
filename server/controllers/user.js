@@ -1,4 +1,6 @@
 import { User } from '../models';
+import { merge } from '../helpers';
+import { omit } from 'lodash';
 import sanitize from 'sanitize-html';
 import jwt from 'jsonwebtoken';
 const sanitizeOptions = {
@@ -43,12 +45,12 @@ const register = (req, res) => {
         if (user) {
             return res.status(422).json({ message: 'User already exists' });
         }
-        const ussss = new User({
+        const createdUser = new User({
             email,
             password,
             role
         });
-        ussss.save((err, newUser) => {
+        createdUser.save((err, newUser) => {
             console.log('after saving');
             if (err) {
                 return res.status(400).json({ error: err });
@@ -67,7 +69,7 @@ const register = (req, res) => {
 // GET ALL USERS
 //= =======================================
 const getUsers = (req, res) => {
-    User.find({}).lean().exec((err, users) => {
+    User.find({}).select('-timezones').lean().exec((err, users) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Could not retrieve users.' });
@@ -82,7 +84,7 @@ const getUsers = (req, res) => {
 const getUser = (req, res) => {
     let { params: { userId } } = req;
     userId = sanitize(userId, sanitizeOptions);
-    User.findOne({ _id: userId }, (err, user) => {
+    User.findOne({ _id: userId }).select('-timezones').lean().exec((err, user) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Could not retrieve user' });
@@ -101,7 +103,7 @@ const updateUser = (req, res) => {
     let { params: { userId } } = req;
     userId = sanitize(userId, sanitizeOptions);
     const { body } = req;
-    User.findOne({ _id: userId }, (err, user) => {
+    User.findOne({ _id: userId }).select('-timezones').exec((err, user) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ message: 'Could not retrieve user' });
@@ -109,11 +111,11 @@ const updateUser = (req, res) => {
         if (!user) {
             return res.status(422).json({ message: "User doesn't exists" });
         }
-        Object.assign(user, body).save((err, user) => {
+        merge(user, body).save((err, user) => {
             if (err) {
                 return res.status(400).json({ error: err });
             }
-            return res.status(200).json(user);
+            return res.status(200).json(omit(user.toObject(), ['password']));
         });
     });
 };
