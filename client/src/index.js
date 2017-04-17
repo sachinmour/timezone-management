@@ -1,9 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import store, { history } from './store';
+import { verify } from './actions';
+import routes from './routes';
 import './index.css';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+verify(store.dispatch).then(() => {
+    ReactDOM.render(
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
+                {routes}
+            </ConnectedRouter>
+        </Provider>,
+        document.getElementById('root')
+    );
+});
