@@ -17,7 +17,6 @@ const verifyUser = dispatch => {
                     type: LOGIN_SUCCESS,
                     payload: user
                 });
-                dispatch(push('/'));
                 resolve();
             })
             .catch(err => {

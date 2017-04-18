@@ -10,7 +10,8 @@ const sanitizeOptions = {
 
 const setUserInfo = user => ({
     _id: user._id,
-    email: user.email
+    email: user.email,
+    role: user.role
 });
 
 // Generate JWT

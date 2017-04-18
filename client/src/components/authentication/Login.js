@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import isEmail from 'validator/lib/isEmail';
-import { MaterialUIWrapper, Errors } from '../helpers';
+import { Errors } from '../helpers';
 import { RaisedButton } from 'material-ui';
 import { loginUser } from '../../actions';
 import styled from 'styled-components';
@@ -50,37 +50,35 @@ class Login extends Component {
     render() {
         const { handleSubmit, auth } = this.props;
         return (
-            <MaterialUIWrapper>
-                <Page>
-                    <Form onSubmit={handleSubmit(this.handleLogin.bind(this))} className="login-page--form">
-                        <Errors error={auth.error} />
-                        <Heading>Timezone Management</Heading>
-                        <div style={{ height: 90 }}>
-                            <Field
-                                name="email"
-                                component={TextField}
-                                style={{ width: '100%' }}
-                                hintText="Email"
-                                type="email"
-                                floatingLabelText="Email"
-                            />
-                        </div>
-                        <div style={{ height: 90 }}>
-                            <Field
-                                name="password"
-                                component={TextField}
-                                style={{ width: '100%' }}
-                                type="password"
-                                hintText="Password"
-                                floatingLabelText="Password"
-                            />
-                        </div>
-                        <div className="login-page--form--actions">
-                            <RaisedButton type="submit" label="Submit" primary={true} />
-                        </div>
-                    </Form>
-                </Page>
-            </MaterialUIWrapper>
+            <Page>
+                <Form onSubmit={handleSubmit(this.handleLogin.bind(this))} className="login-page--form">
+                    <Errors error={auth.error} />
+                    <Heading>Timezone Management</Heading>
+                    <div style={{ height: 90 }}>
+                        <Field
+                            name="email"
+                            component={TextField}
+                            style={{ width: '100%' }}
+                            hintText="Email"
+                            type="email"
+                            floatingLabelText="Email"
+                        />
+                    </div>
+                    <div style={{ height: 90 }}>
+                        <Field
+                            name="password"
+                            component={TextField}
+                            style={{ width: '100%' }}
+                            type="password"
+                            hintText="Password"
+                            floatingLabelText="Password"
+                        />
+                    </div>
+                    <div className="login-page--form--actions">
+                        <RaisedButton type="submit" label="Submit" primary={true} />
+                    </div>
+                </Form>
+            </Page>
         );
     }
 }
