@@ -7,7 +7,7 @@ const deleteUser = ({ userId }) =>
             type: DELETE_USER_PENDING
         });
         return axios()
-            .delete(`/users/${userId}`)
+            .delete(`api/v1/users/${userId}`)
             .then(response => {
                 dispatch({
                     type: DELETE_USER_SUCCESS,

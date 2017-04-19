@@ -7,7 +7,7 @@ const getTimezones = ({ userId }) =>
             type: GET_TIMEZONES_PENDING
         });
         return axios()
-            .get(`/users/${userId}/timezones`)
+            .get(`api/v1/users/${userId}/timezones`)
             .then(response => {
                 const timezones = response.data;
                 dispatch({

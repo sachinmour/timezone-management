@@ -7,7 +7,7 @@ const updateTimezone = ({ name, timezone, userId, timezoneId }) =>
             type: UPDATE_TIMEZONE_PENDING
         });
         return axios()
-            .patch(`/users/${userId}/timezones/${timezoneId}`, { name, timezone })
+            .patch(`api/v1/users/${userId}/timezones/${timezoneId}`, { name, timezone })
             .then(response => {
                 const timezone = response.data;
                 dispatch({

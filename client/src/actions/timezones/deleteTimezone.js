@@ -7,7 +7,7 @@ const deleteTimezone = ({ userId, timezoneId }) =>
             type: DELETE_TIMEZONE_PENDING
         });
         return axios()
-            .delete(`/users/${userId}/timezones/${timezoneId}`)
+            .delete(`api/v1/users/${userId}/timezones/${timezoneId}`)
             .then(response => {
                 dispatch({
                     type: DELETE_TIMEZONE_SUCCESS,

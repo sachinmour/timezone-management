@@ -7,7 +7,7 @@ const createTimezone = ({ name, timezone, userId }) =>
             type: CREATE_TIMEZONE_PENDING
         });
         return axios()
-            .post(`/users/${userId}/timezones`, { name, timezone })
+            .post(`api/v1/users/${userId}/timezones`, { name, timezone })
             .then(response => {
                 const timezones = response.data;
                 dispatch({

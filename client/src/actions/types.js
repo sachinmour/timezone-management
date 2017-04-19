@@ -4,6 +4,8 @@ export const SIGNUP_PENDING = 'signup_pending', SIGNUP_ERROR = 'signup_error';
 
 export const GET_USERS_PENDING = 'get_users_pending', GET_USERS_SUCCESS = 'get_users_success', GET_USERS_ERROR = 'get_users_error';
 
+export const GET_USER_PENDING = 'get_user_pending', GET_USER_SUCCESS = 'get_user_success', GET_USER_ERROR = 'get_user_error';
+
 export const UPDATE_USER_PENDING = 'update_user_pending',
     UPDATE_USER_SUCCESS = 'update_user_success',
     UPDATE_USER_ERROR = 'update_user_error';

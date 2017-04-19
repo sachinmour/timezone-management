@@ -1,6 +1,6 @@
 import { axios } from '../utils';
 import { push } from 'react-router-redux';
-import { LOGIN_SUCCESS, LOGOUT } from '../types';
+import { LOGIN_SUCCESS } from '../types';
 
 const verifyUser = dispatch => {
     if (!sessionStorage.getItem('jwtToken')) {
@@ -21,11 +21,7 @@ const verifyUser = dispatch => {
             })
             .catch(err => {
                 sessionStorage.removeItem('jwtToken');
-                dispatch({
-                    type: LOGOUT,
-                    payload: err
-                });
-                dispatch(push('/login'));
+                dispatch(push('/logout'));
                 resolve();
             });
     });
