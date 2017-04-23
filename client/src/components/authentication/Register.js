@@ -59,7 +59,7 @@ class Register extends Component {
                         />
                     </div>
                     <div style={{ height: 90 }}>
-                        <Field name="role" component={SelectField} hintText="Role" floatingLabelText="Role">
+                        <Field name="role" style={{ width: '100%' }} component={SelectField} hintText="Role" floatingLabelText="Role">
                             {roles.map(role => <MenuItem key={role} value={role} primaryText={role} />)}
                         </Field>
                     </div>

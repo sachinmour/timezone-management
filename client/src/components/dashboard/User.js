@@ -1,8 +1,7 @@
 import React from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import { Card, CardActions, CardHeader, CardText, RaisedButton } from 'material-ui';
 import { get } from 'lodash';
 import { Timezones } from './';
 import { Authenticated } from '../authentication';
@@ -26,8 +25,8 @@ const User = (
         <Card expandable={expandable}>
             <CardHeader title={email} subtitle={role} actAsExpander={expandable} showExpandableButton={expandable} />
             <CardActions>
-                <FlatButton label="Edit" onClick={() => switchUserDialog(_id)} />
-                {_id !== authId ? <FlatButton label="Delete" onClick={() => switchDeleteUserDialog(_id)} /> : null}
+                <RaisedButton label="Edit" primary={true} onClick={() => switchUserDialog(_id)} />
+                {_id !== authId ? <RaisedButton label="Delete" secondary={true} onClick={() => switchDeleteUserDialog(_id)} /> : null}
             </CardActions>
             <CardText expandable={true}>
                 {allowed

@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import isEmail from 'validator/lib/isEmail';
 import { Errors } from '../helpers';
-import { RaisedButton, FlatButton } from 'material-ui';
+import { RaisedButton } from 'material-ui';
 import { loginUser } from '../../actions';
 import styled from 'styled-components';
 import { TextField } from 'redux-form-material-ui';
@@ -70,7 +70,7 @@ class Login extends Component {
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <RaisedButton type="submit" label="Login" primary={true} />
-                        <FlatButton label="Register" onClick={() => push('/register')} />
+                        <RaisedButton label="Register" onClick={() => push('/register')} />
                     </div>
                 </Form>
             </Page>

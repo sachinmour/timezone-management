@@ -31,7 +31,7 @@
     "watch": "nodemon --config nodemon.json --exec babel-node server.js",
     "prestart": "babel server.js --out-file server.js & babel server --out-dir server",
     "start": "NODE_ENV=production node server.js",
-    "test": "mocha server/**/__tests__/**/*.js* --require babel-register --timeout 120000"
+    "test": "nodemon --watch server/__tests__ -e js --exec mocha server/**/__tests__/**/*.js* --require babel-register --timeout 120000"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

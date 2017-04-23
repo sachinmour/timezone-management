@@ -8,4 +8,4 @@ npm-debug.log
 /.env
 /.DS_Store
 /client2
-/server/__tests__
+/server/__tests__/book
