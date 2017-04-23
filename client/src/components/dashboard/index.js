@@ -8,3 +8,5 @@ export { default as Timezone } from './Timezone';
 export { default as Timezones } from './Timezones';
 export { default as UserEditor } from './UserEditor';
 export { default as TimezoneEditor } from './TimezoneEditor';
+export { default as DeleteTimezone } from './DeleteTimezone';
+export { default as DeleteUser } from './DeleteUser';

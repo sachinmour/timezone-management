@@ -5,6 +5,7 @@ const ErrorContainer = styled.div`
     width: 100%;
     display: ${props => props.error ? 'flex' : 'none'};
     background-color: #e6e6e6;
+    padding-top: 10px,
     color: #da3a3a;
 `;
 

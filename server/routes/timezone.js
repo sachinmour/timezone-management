@@ -55,6 +55,7 @@ export default router => {
                 timezoneId: t.String
             }
         }),
+        authentication.requireAuth,
         authentication.roleAuthorization([ROLES.ADMIN]),
         TimezoneController.deleteTimezone
     );

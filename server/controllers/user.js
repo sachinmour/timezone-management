@@ -37,7 +37,7 @@ const login = (req, res) => {
 const register = (req, res) => {
     let { body: { email } } = req;
     email = sanitize(email, sanitizeOptions);
-    const { body: { password, role, login = false } } = req;
+    const { body: { password, role, login = true } } = req;
     User.findOne({ email }, (err, user) => {
         if (err) {
             console.error(err);

@@ -6,7 +6,7 @@ import { keys, sortBy } from 'lodash';
 import { FloatingActionButton } from 'material-ui';
 import { ContentAdd } from 'material-ui/svg-icons';
 import { getUsers } from '../../actions';
-import { User, TimezoneEditor, UserEditor } from './';
+import { User, TimezoneEditor, UserEditor, DeleteUser, DeleteTimezone } from './';
 
 class Users extends Component {
     constructor() {
@@ -16,11 +16,15 @@ class Users extends Component {
             userId: undefined,
             dialogOpen: {
                 user: false,
-                timezone: false
+                timezone: false,
+                deleteUser: false,
+                deleteTimezone: false
             }
         };
         this.switchUserDialog = this.switchUserDialog.bind(this);
         this.switchTimezoneDialog = this.switchTimezoneDialog.bind(this);
+        this.switchDeleteUserDialog = this.switchDeleteUserDialog.bind(this);
+        this.switchDeleteTimezoneDialog = this.switchDeleteTimezoneDialog.bind(this);
     }
 
     componentWillMount() {
@@ -39,12 +43,33 @@ class Users extends Component {
         }));
     }
 
+    switchDeleteTimezoneDialog(newTimezoneId, newUserId) {
+        this.setState(({ timezoneId, userId, dialogOpen }) => ({
+            timezoneId: newTimezoneId || timezoneId,
+            userId: newUserId || userId,
+            dialogOpen: {
+                ...dialogOpen,
+                deleteTimezone: !dialogOpen.deleteTimezone
+            }
+        }));
+    }
+
     switchUserDialog(newUserId) {
         this.setState(({ dialogOpen, userId }) => ({
             userId: newUserId || userId,
             dialogOpen: {
                 ...dialogOpen,
                 user: !dialogOpen.user
+            }
+        }));
+    }
+
+    switchDeleteUserDialog(newUserId) {
+        this.setState(({ dialogOpen, userId }) => ({
+            userId: newUserId || userId,
+            dialogOpen: {
+                ...dialogOpen,
+                deleteUser: !dialogOpen.deleteUser
             }
         }));
     }
@@ -57,6 +82,8 @@ class Users extends Component {
             <User
                 switchUserDialog={this.switchUserDialog}
                 switchTimezoneDialog={this.switchTimezoneDialog}
+                switchDeleteUserDialog={this.switchDeleteUserDialog}
+                switchDeleteTimezoneDialog={this.switchDeleteTimezoneDialog}
                 expandable={expandable}
                 key={_id}
                 {...users[_id]}
@@ -72,6 +99,13 @@ class Users extends Component {
                 <TimezoneEditor
                     switchTimezoneDialog={this.switchTimezoneDialog}
                     open={dialogOpen.timezone}
+                    timezoneId={timezoneId}
+                    userId={userId}
+                />
+                <DeleteUser switchDeleteUserDialog={this.switchDeleteUserDialog} open={dialogOpen.deleteUser} _id={userId} />
+                <DeleteTimezone
+                    switchDeleteTimezoneDialog={this.switchDeleteTimezoneDialog}
+                    open={dialogOpen.deleteTimezone}
                     timezoneId={timezoneId}
                     userId={userId}
                 />

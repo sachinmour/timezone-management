@@ -33,7 +33,6 @@ const roleAuthorization = roles => {
         if (roles.indexOf(get(user, 'role', '')) > -1) {
             return next();
         }
-
         return res.status(401).json({ message: 'You are not authorized to view this content' });
     };
 };

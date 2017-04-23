@@ -26,7 +26,7 @@ let UserEditor = ({ open, switchUserDialog, updateUser, createUser, handleSubmit
         <RaisedButton style={{ marginRight: 10 }} label="Cancel" disabled={status.pending} primary={true} onTouchTap={switchUserDialog} />,
         <RaisedButton
             label={_id ? 'Update' : 'Create'}
-            disabled={status.pending}
+            disabled={status.pending || !valid}
             primary={true}
             keyboardFocused={true}
             onTouchTap={handleSubmit(onSubmit)}

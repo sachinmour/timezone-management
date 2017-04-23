@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import { FloatingActionButton } from 'material-ui';
 import { ContentAdd } from 'material-ui/svg-icons';
 import { bindActionCreators } from 'redux';
-import { User, UserEditor, TimezoneEditor } from './';
+import { User, UserEditor, TimezoneEditor, DeleteTimezone } from './';
 import { Authenticated } from '../authentication';
 import { getUser } from '../../actions';
 
@@ -16,11 +16,13 @@ class Home extends Component {
             timezoneId: undefined,
             dialogOpen: {
                 user: false,
-                timezone: false
+                timezone: false,
+                deleteTimezone: false
             }
         };
         this.switchUserDialog = this.switchUserDialog.bind(this);
         this.switchTimezoneDialog = this.switchTimezoneDialog.bind(this);
+        this.switchDeleteTimezoneDialog = this.switchDeleteTimezoneDialog.bind(this);
     }
 
     switchTimezoneDialog(newTimezoneId, newUserId) {
@@ -30,6 +32,17 @@ class Home extends Component {
             dialogOpen: {
                 ...dialogOpen,
                 timezone: !dialogOpen.timezone
+            }
+        }));
+    }
+
+    switchDeleteTimezoneDialog(newTimezoneId, newUserId) {
+        this.setState(({ timezoneId, userId, dialogOpen }) => ({
+            timezoneId: newTimezoneId || timezoneId,
+            userId: newUserId || userId,
+            dialogOpen: {
+                ...dialogOpen,
+                deleteTimezone: !dialogOpen.deleteTimezone
             }
         }));
     }
@@ -52,6 +65,7 @@ class Home extends Component {
                 <User
                     allowed={true}
                     expandable={true}
+                    switchDeleteTimezoneDialog={this.switchDeleteTimezoneDialog}
                     switchTimezoneDialog={this.switchTimezoneDialog}
                     switchUserDialog={this.switchUserDialog}
                     _id={_id}
@@ -67,6 +81,12 @@ class Home extends Component {
                 <TimezoneEditor
                     switchTimezoneDialog={this.switchTimezoneDialog}
                     open={dialogOpen.timezone}
+                    timezoneId={timezoneId}
+                    userId={_id}
+                />
+                <DeleteTimezone
+                    switchDeleteTimezoneDialog={this.switchDeleteTimezoneDialog}
+                    open={dialogOpen.deleteTimezone}
                     timezoneId={timezoneId}
                     userId={_id}
                 />

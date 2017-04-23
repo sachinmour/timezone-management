@@ -3,24 +3,43 @@ import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import { get } from 'lodash';
 import { Timezones } from './';
 import { Authenticated } from '../authentication';
 
-const User = ({ email, _id, role, allowed = false, expandable, switchTimezoneDialog, switchUserDialog }) => {
+const User = (
+    {
+        authId,
+        email,
+        _id,
+        role,
+        allowed = false,
+        expandable,
+        switchTimezoneDialog,
+        switchUserDialog,
+        switchDeleteUserDialog,
+        switchDeleteTimezoneDialog
+    }
+) => {
     if (!email) return null;
     return (
         <Card expandable={expandable}>
             <CardHeader title={email} subtitle={role} actAsExpander={expandable} showExpandableButton={expandable} />
             <CardActions>
                 <FlatButton label="Edit" onClick={() => switchUserDialog(_id)} />
-                <FlatButton label="Delete" />
+                {_id !== authId ? <FlatButton label="Delete" onClick={() => switchDeleteUserDialog(_id)} /> : null}
             </CardActions>
             <CardText expandable={true}>
                 {allowed
-                    ? <Timezones switchTimezoneDialog={(timezoneId, userId) => switchTimezoneDialog(timezoneId, userId)} userId={_id} />
+                    ? <Timezones
+                          switchDeleteTimezoneDialog={(timezoneId, userId) => switchDeleteTimezoneDialog(timezoneId, userId)}
+                          switchTimezoneDialog={(timezoneId, userId) => switchTimezoneDialog(timezoneId, userId)}
+                          userId={_id}
+                      />
                     : <Authenticated
                           Component={Timezones}
                           switchTimezoneDialog={(timezoneId, userId) => switchTimezoneDialog(timezoneId, userId)}
+                          switchDeleteTimezoneDialog={(timezoneId, userId) => switchDeleteTimezoneDialog(timezoneId, userId)}
                           access={['admin']}
                           userId={_id}
                       />}
@@ -30,6 +49,7 @@ const User = ({ email, _id, role, allowed = false, expandable, switchTimezoneDia
 };
 
 const getUserFromState = (state, props) => state.users.value[props._id];
-const getUser = createSelector([getUserFromState], user => user || {});
+const getIdFromAuth = state => get(state, ['auth', 'user', '_id']);
+const getUser = createSelector([getUserFromState, getIdFromAuth], (user, authId) => ({ ...user, authId } || {}));
 
 export default connect(getUser)(User);

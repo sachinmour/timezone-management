@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { bindActionCreators } from 'redux';
-import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import isEmail from 'validator/lib/isEmail';
 import { Errors } from '../helpers';
-import { RaisedButton, FlatButton } from 'material-ui';
-import { loginUser } from '../../actions';
+import { RaisedButton, MenuItem } from 'material-ui';
+import { registerUser } from '../../actions';
 import styled from 'styled-components';
-import { TextField } from 'redux-form-material-ui';
+import { TextField, SelectField } from 'redux-form-material-ui';
 
 const Page = styled.div`
     position: absolute;
@@ -35,17 +34,18 @@ const Heading = styled.div`
     font-size: 20px;
 `;
 
-class Login extends Component {
-    handleLogin(values) {
+class Register extends Component {
+    handleRegister(values) {
         const { reset } = this.props;
-        return this.props.loginUser(values).catch(err => reset());
+        return this.props.registerUser(values).catch(err => reset());
     }
 
     render() {
-        const { handleSubmit, auth, push } = this.props;
+        const { handleSubmit, auth } = this.props;
+        const roles = ['user', 'manager', 'admin'];
         return (
             <Page>
-                <Form onSubmit={handleSubmit(this.handleLogin.bind(this))} className="login-page--form">
+                <Form onSubmit={handleSubmit(this.handleRegister.bind(this))} className="register-page--form">
                     <Errors error={auth.error} />
                     <Heading>Timezone Management</Heading>
                     <div style={{ height: 90 }}>
@@ -59,6 +59,11 @@ class Login extends Component {
                         />
                     </div>
                     <div style={{ height: 90 }}>
+                        <Field name="role" component={SelectField} hintText="Role" floatingLabelText="Role">
+                            {roles.map(role => <MenuItem key={role} value={role} primaryText={role} />)}
+                        </Field>
+                    </div>
+                    <div style={{ height: 90 }}>
                         <Field
                             name="password"
                             component={TextField}
@@ -68,9 +73,8 @@ class Login extends Component {
                             floatingLabelText="Password"
                         />
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <RaisedButton type="submit" label="Login" primary={true} />
-                        <FlatButton label="Register" onClick={() => push('/register')} />
+                    <div className="register-page--form--actions">
+                        <RaisedButton type="submit" label="Register" primary={true} />
                     </div>
                 </Form>
             </Page>
@@ -89,12 +93,12 @@ const validate = values => {
     return errors;
 };
 
-Login = reduxForm({
-    form: 'login',
+Register = reduxForm({
+    form: 'register',
     validate
-})(Login);
+})(Register);
 
 const mapStateToProps = state => ({ auth: state.auth });
-const mapDispatchToProps = dispatch => bindActionCreators({ loginUser, push }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ registerUser }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
