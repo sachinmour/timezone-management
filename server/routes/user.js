@@ -39,7 +39,8 @@ export default router => {
             body: {
                 email: t.String,
                 password: t.String,
-                role: t.String
+                role: t.String,
+                login: maybe(t.Boolean)
             }
         }),
         UserController.register

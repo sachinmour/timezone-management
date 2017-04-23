@@ -8,6 +8,7 @@
     "material-ui": "^0.17.4",
     "moment-timezone": "^0.5.13",
     "react": "^15.5.3",
+    "react-bootstrap": "^0.30.10",
     "react-dom": "^15.5.3",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",

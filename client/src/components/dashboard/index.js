@@ -6,3 +6,5 @@ export { default as Dashboard } from './Dashboard';
 export { default as Clock } from './Clock';
 export { default as Timezone } from './Timezone';
 export { default as Timezones } from './Timezones';
+export { default as UserEditor } from './UserEditor';
+export { default as TimezoneEditor } from './TimezoneEditor';

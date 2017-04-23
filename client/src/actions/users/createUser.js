@@ -1,17 +1,17 @@
 import { axios } from '../utils';
-import { GET_USER_SUCCESS, GET_USER_PENDING, GET_USER_ERROR, RESET_USER_STATUS } from '../types';
+import { CREATE_USER_SUCCESS, CREATE_USER_PENDING, CREATE_USER_ERROR, RESET_USER_STATUS } from '../types';
 
-const getUser = _id =>
+const createUser = ({ email, password, role }) =>
     dispatch => {
         dispatch({
-            type: GET_USER_PENDING
+            type: CREATE_USER_PENDING
         });
         return axios()
-            .get(`api/v1/users/${_id}`)
+            .post(`api/v1/users`, { email, password, role, login: false })
             .then(response => {
                 const user = response.data;
                 dispatch({
-                    type: GET_USER_SUCCESS,
+                    type: CREATE_USER_SUCCESS,
                     payload: { [user._id]: user }
                 });
                 dispatch({
@@ -20,11 +20,11 @@ const getUser = _id =>
             })
             .catch(err => {
                 dispatch({
-                    type: GET_USER_ERROR,
+                    type: CREATE_USER_ERROR,
                     payload: err
                 });
                 throw err;
             });
     };
 
-export default getUser;
+export default createUser;

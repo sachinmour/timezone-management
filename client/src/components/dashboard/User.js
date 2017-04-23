@@ -6,17 +6,24 @@ import FlatButton from 'material-ui/FlatButton';
 import { Timezones } from './';
 import { Authenticated } from '../authentication';
 
-const User = ({ email, _id, role, allowed = false, expandable }) => {
+const User = ({ email, _id, role, allowed = false, expandable, switchTimezoneDialog, switchUserDialog }) => {
     if (!email) return null;
     return (
         <Card expandable={expandable}>
             <CardHeader title={email} subtitle={role} actAsExpander={expandable} showExpandableButton={expandable} />
             <CardActions>
-                <FlatButton label="Edit" />
+                <FlatButton label="Edit" onClick={() => switchUserDialog(_id)} />
                 <FlatButton label="Delete" />
             </CardActions>
             <CardText expandable={true}>
-                {allowed ? <Timezones userId={_id} /> : <Authenticated Component={Timezones} access={['admin']} userId={_id} />}
+                {allowed
+                    ? <Timezones switchTimezoneDialog={(timezoneId, userId) => switchTimezoneDialog(timezoneId, userId)} userId={_id} />
+                    : <Authenticated
+                          Component={Timezones}
+                          switchTimezoneDialog={(timezoneId, userId) => switchTimezoneDialog(timezoneId, userId)}
+                          access={['admin']}
+                          userId={_id}
+                      />}
             </CardText>
         </Card>
     );

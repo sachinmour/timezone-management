@@ -23,7 +23,7 @@ class Authenticated extends Component {
     render() {
         const { user, access, Component } = this.props;
         if (access.includes(user.role)) {
-            return <Component {...omit(this.props, ['access', 'user', 'Component'])} />;
+            return <Component {...omit(this.props, ['access', 'user', 'Component', 'push', 'authenticated'])} />;
         }
         return null;
     }

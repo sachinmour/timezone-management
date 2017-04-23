@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
-import { Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { User, Toolbar, Users } from './';
+import { Home, Toolbar, Users } from './';
 import { getUser } from '../../actions';
 
 class Dashboard extends Component {
@@ -13,12 +13,14 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { _id, location: { pathname } } = this.props;
+        const { location: { pathname } } = this.props;
         return (
             <div>
                 <Toolbar path={pathname} />
-                <Route exact path="/" render={() => <User allowed={true} expandable={true} _id={_id} />} />
-                <Route exact path="/users" component={Users} />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/users" component={Users} />
+                </Switch>
             </div>
         );
     }

@@ -32,12 +32,12 @@ const login = (req, res) => {
 };
 
 //= =======================================
-// GET ALL USERS
+// Register User
 //= =======================================
 const register = (req, res) => {
     let { body: { email } } = req;
     email = sanitize(email, sanitizeOptions);
-    const { body: { password, role } } = req;
+    const { body: { password, role, login = false } } = req;
     User.findOne({ email }, (err, user) => {
         if (err) {
             console.error(err);
@@ -52,9 +52,11 @@ const register = (req, res) => {
             role
         });
         createdUser.save((err, newUser) => {
-            console.log('after saving');
             if (err) {
                 return res.status(400).json({ error: err });
+            }
+            if (!login) {
+                return res.status(201).json(omit(newUser.toObject(), ['password']));
             }
             // login user
             const userInfo = setUserInfo(newUser);
