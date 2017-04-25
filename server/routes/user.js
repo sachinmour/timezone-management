@@ -43,6 +43,8 @@ export default router => {
                 login: maybe(t.Boolean)
             }
         }),
+        authentication.requireAuth,
+        authentication.roleAuthorization([ROLES.ADMIN, ROLES.MANAGER]),
         UserController.register
     );
     router.delete(
