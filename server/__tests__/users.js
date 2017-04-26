@@ -1,48 +1,16 @@
-import testServer, { mockgoose } from './testServer';
-import { values } from 'lodash';
+import { mockgoose } from './testServer';
 import chai from 'chai';
+import { values } from 'lodash';
 import chaiHttp from 'chai-http';
 import constants from '../helpers/constants';
 import User from '../models/user';
+import { createUserPromise, newUser } from './helpers';
 
-const should = chai.should();
 chai.use(chaiHttp);
 let { ROLES } = constants;
 ROLES = values(ROLES);
-let server;
 
-const createUserPromise = user => {
-    const newUser = new User(user);
-    return newUser.save();
-};
-
-const newUser = role => ({
-    email: `${role}@${role}.com`,
-    password: role,
-    role
-});
-
-describe('Tests', function() {
-    before(function(done) {
-        testServer()
-            .then(newServer => {
-                server = newServer;
-                done();
-            })
-            .catch(err => {
-                console.log(err);
-                done();
-            });
-    });
-
-    describe('Users', function() {
-        userTests('admin');
-        userTests('manager');
-        userTests('user');
-    });
-});
-
-function userTests(role) {
+function userTests(role, server) {
     describe(`user with role ${role}`, function() {
         let currentUser = {};
         let currentUserToken = '';
@@ -193,3 +161,5 @@ function userTests(role) {
         });
     });
 }
+
+export default userTests;

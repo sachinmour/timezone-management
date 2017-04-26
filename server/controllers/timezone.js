@@ -23,7 +23,7 @@ const createTimezone = (req, res) => {
             if (err) {
                 return res.status(400).json({ error: err });
             }
-            return res.status(200).json(updatedUser.timezones);
+            return res.status(201).json(updatedUser.timezones);
         });
     });
 };
