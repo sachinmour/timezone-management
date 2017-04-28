@@ -16,6 +16,7 @@ let DeleteTimezone = ({ open, switchDeleteTimezoneDialog, deleteTimezone, status
         />,
         <RaisedButton
             label="Delete"
+            className="DeleteTimezoneClick"
             disabled={status.pending}
             primary={true}
             onTouchTap={() => deleteTimezone({ timezoneId, userId }).then(switchDeleteTimezoneDialog)}

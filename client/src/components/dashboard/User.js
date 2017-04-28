@@ -26,7 +26,9 @@ const User = (
             <CardHeader title={email} subtitle={role} actAsExpander={expandable} showExpandableButton={expandable} />
             <CardActions>
                 <RaisedButton className="EditUser" label="Edit" primary={true} onClick={() => switchUserDialog(_id)} />
-                {_id !== authId ? <RaisedButton label="Delete" secondary={true} onClick={() => switchDeleteUserDialog(_id)} /> : null}
+                {_id !== authId
+                    ? <RaisedButton className="DeleteUser" label="Delete" secondary={true} onClick={() => switchDeleteUserDialog(_id)} />
+                    : null}
             </CardActions>
             <CardText expandable={true}>
                 {allowed

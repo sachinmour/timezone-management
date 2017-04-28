@@ -58,7 +58,7 @@ class Timezones extends Component {
     }
 
     render() {
-        const { switchTimezoneDialog, timezones } = this.props;
+        const { switchTimezoneDialog, timezones, userId } = this.props;
         const { filterAgainst, filteredTimezones } = this.state;
         const tableHead = (
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
@@ -86,7 +86,7 @@ class Timezones extends Component {
                           </TableBody>
                       </Table>
                     : null}
-                <FloatingActionButton mini={true} onClick={() => switchTimezoneDialog()}>
+                <FloatingActionButton className="AddTimezone" mini={true} onClick={() => switchTimezoneDialog(null, userId)}>
                     <ContentAdd />
                 </FloatingActionButton>
             </div>

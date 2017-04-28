@@ -16,6 +16,7 @@ let DeleteUser = ({ open, switchDeleteUserDialog, deleteUser, status, _id }) => 
         />,
         <RaisedButton
             label="Delete"
+            className="DeleteUserClick"
             disabled={status.pending}
             primary={true}
             onTouchTap={() => deleteUser({ userId: _id }).then(switchDeleteUserDialog)}

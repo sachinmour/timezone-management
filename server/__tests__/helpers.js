@@ -9,7 +9,7 @@ export const newUser = (role, timezone) => ({
     email: `${role}@${role}.com`,
     password: role,
     role,
-    timezones: [timezone] || []
+    timezones: timezone ? [timezone] : []
 });
 
 export const newTimezone = role => ({

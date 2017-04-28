@@ -58,7 +58,7 @@ let TimezoneEditor = (
         />,
         <RaisedButton
             label={_id ? 'Update' : 'Create'}
-            className="TimezoneEditorSuccess"
+            className="TimezoneEditor-Success"
             disabled={status.pending || !valid}
             primary={true}
             keyboardFocused={true}

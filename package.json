@@ -39,5 +39,8 @@
   "engines": {
     "node": "6.10.1",
     "yarn": "0.22.0"
+  },
+  "devDependencies": {
+    "mongoose": "4.7.9"
   }
 }
