@@ -22,10 +22,10 @@ const User = (
 ) => {
     if (!email) return null;
     return (
-        <Card expandable={expandable}>
+        <Card expandable={expandable} className="User">
             <CardHeader title={email} subtitle={role} actAsExpander={expandable} showExpandableButton={expandable} />
             <CardActions>
-                <RaisedButton label="Edit" primary={true} onClick={() => switchUserDialog(_id)} />
+                <RaisedButton className="EditUser" label="Edit" primary={true} onClick={() => switchUserDialog(_id)} />
                 {_id !== authId ? <RaisedButton label="Delete" secondary={true} onClick={() => switchDeleteUserDialog(_id)} /> : null}
             </CardActions>
             <CardText expandable={true}>

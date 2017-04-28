@@ -11,7 +11,19 @@ import { bindActionCreators } from 'redux';
 import { updateTimezone, createTimezone } from '../../actions';
 
 let TimezoneEditor = (
-    { open, userId, change, switchTimezoneDialog, updateTimezone, createTimezone, handleSubmit, initialValues, status, valid, formValues }
+    {
+        open,
+        userId,
+        change,
+        switchTimezoneDialog,
+        updateTimezone,
+        createTimezone,
+        handleSubmit,
+        initialValues,
+        status,
+        valid,
+        formValues
+    }
 ) => {
     const _id = get(initialValues, ['_id']);
     const timezoneValue = get(formValues, ['timezone']);
@@ -46,6 +58,7 @@ let TimezoneEditor = (
         />,
         <RaisedButton
             label={_id ? 'Update' : 'Create'}
+            className="TimezoneEditorSuccess"
             disabled={status.pending || !valid}
             primary={true}
             keyboardFocused={true}

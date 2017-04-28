@@ -33,9 +33,9 @@ class Users extends Component {
     }
 
     switchTimezoneDialog(newTimezoneId, newUserId) {
-        this.setState(({ timezoneId, userId, dialogOpen }) => ({
-            timezoneId: newTimezoneId || timezoneId,
-            userId: newUserId || userId,
+        this.setState(({ dialogOpen }) => ({
+            timezoneId: newTimezoneId,
+            userId: newUserId,
             dialogOpen: {
                 ...dialogOpen,
                 timezone: !dialogOpen.timezone
@@ -44,9 +44,9 @@ class Users extends Component {
     }
 
     switchDeleteTimezoneDialog(newTimezoneId, newUserId) {
-        this.setState(({ timezoneId, userId, dialogOpen }) => ({
-            timezoneId: newTimezoneId || timezoneId,
-            userId: newUserId || userId,
+        this.setState(({ dialogOpen }) => ({
+            timezoneId: newTimezoneId,
+            userId: newUserId,
             dialogOpen: {
                 ...dialogOpen,
                 deleteTimezone: !dialogOpen.deleteTimezone
@@ -55,8 +55,8 @@ class Users extends Component {
     }
 
     switchUserDialog(newUserId) {
-        this.setState(({ dialogOpen, userId }) => ({
-            userId: newUserId || userId,
+        this.setState(({ dialogOpen }) => ({
+            userId: newUserId,
             dialogOpen: {
                 ...dialogOpen,
                 user: !dialogOpen.user
@@ -65,8 +65,8 @@ class Users extends Component {
     }
 
     switchDeleteUserDialog(newUserId) {
-        this.setState(({ dialogOpen, userId }) => ({
-            userId: newUserId || userId,
+        this.setState(({ dialogOpen }) => ({
+            userId: newUserId,
             dialogOpen: {
                 ...dialogOpen,
                 deleteUser: !dialogOpen.deleteUser
@@ -92,7 +92,7 @@ class Users extends Component {
         return (
             <div>
                 {UsersHTML}
-                <FloatingActionButton mini={true} onClick={() => this.switchUserDialog()}>
+                <FloatingActionButton className="AddUser" mini={true} onClick={() => this.switchUserDialog()}>
                     <ContentAdd />
                 </FloatingActionButton>
                 <UserEditor switchUserDialog={this.switchUserDialog} open={dialogOpen.user} _id={userId} />

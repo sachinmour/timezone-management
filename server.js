@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGODB_URI, options);
 const app = express();
 app.use(helment()); // security feature
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'development') {
     app.use(express.static(path.join(__dirname, '/client/build')));
 }
 app.use(bodyParser.json({ limit: '20mb' }));

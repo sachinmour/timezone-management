@@ -1,6 +1,7 @@
 import { get } from 'lodash';
 
 const handleError = err => {
+    if (!err.response) return;
     const message = get(err, ['response', 'data', 'message']);
     if (message) {
         return { _error: message };

@@ -42,7 +42,7 @@ const timezonesReducer = (state = defaultState, action) => {
                 value: { ...state.value, ...action.payload }
             };
         case UPDATE_TIMEZONE_SUCCESS: {
-            const userId = keys[action.payload][0];
+            const userId = keys(action.payload)[0];
             const timezoneId = action.payload[userId]._id;
             const timezones = {
                 [userId]: get(state, ['value', userId], []).map(zone => {

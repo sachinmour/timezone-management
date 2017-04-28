@@ -5,6 +5,7 @@ import timezoneTests from './timezones';
 const should = chai.should();
 
 describe('Tests', function() {
+    const server = 'http://localhost:3001';
     before(function(done) {
         testServer()
             .then(() => {
@@ -17,10 +18,12 @@ describe('Tests', function() {
     });
 
     describe('Users', function() {
-        const server = 'http://localhost:3001';
         userTests('admin', server);
         userTests('manager', server);
         userTests('user', server);
+    });
+
+    describe('Timezones', function() {
         timezoneTests('admin', server);
         timezoneTests('manager', server);
         timezoneTests('user', server);

@@ -26,9 +26,9 @@ class Home extends Component {
     }
 
     switchTimezoneDialog(newTimezoneId, newUserId) {
-        this.setState(({ timezoneId, userId, dialogOpen }) => ({
-            timezoneId: newTimezoneId || timezoneId,
-            userId: newUserId || userId,
+        this.setState(({ dialogOpen }) => ({
+            timezoneId: newTimezoneId,
+            userId: newUserId,
             dialogOpen: {
                 ...dialogOpen,
                 timezone: !dialogOpen.timezone
@@ -37,9 +37,9 @@ class Home extends Component {
     }
 
     switchDeleteTimezoneDialog(newTimezoneId, newUserId) {
-        this.setState(({ timezoneId, userId, dialogOpen }) => ({
-            timezoneId: newTimezoneId || timezoneId,
-            userId: newUserId || userId,
+        this.setState(({ dialogOpen }) => ({
+            timezoneId: newTimezoneId,
+            userId: newUserId,
             dialogOpen: {
                 ...dialogOpen,
                 deleteTimezone: !dialogOpen.deleteTimezone
@@ -48,8 +48,8 @@ class Home extends Component {
     }
 
     switchUserDialog(newUserId) {
-        this.setState(({ dialogOpen, userId }) => ({
-            userId: newUserId || userId,
+        this.setState(({ dialogOpen }) => ({
+            userId: newUserId,
             dialogOpen: {
                 ...dialogOpen,
                 user: !dialogOpen.user
@@ -73,6 +73,7 @@ class Home extends Component {
                 <Authenticated
                     Component={FloatingActionButton}
                     mini={true}
+                    className="AddUser"
                     access={['admin', 'manager']}
                     onClick={() => this.switchUserDialog()}
                     children={<ContentAdd />}

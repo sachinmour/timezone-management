@@ -9,7 +9,7 @@ import { get } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { updateUser, createUser } from '../../actions';
 
-let UserEditor = ({ open, switchUserDialog, updateUser, createUser, handleSubmit, initialValues, status, reset, valid }) => {
+let UserEditor = ({ open, switchUserDialog, updateUser, createUser, handleSubmit, initialValues, status, valid }) => {
     const _id = get(initialValues, ['_id']);
     const changeUser = _id ? updateUser : createUser;
     const onSubmit = values => {
@@ -17,7 +17,6 @@ let UserEditor = ({ open, switchUserDialog, updateUser, createUser, handleSubmit
             return Promise.reject(new SubmissionError({ password: 'Required' }));
         }
         return changeUser(values).then(() => {
-            reset();
             switchUserDialog();
         });
     };
@@ -26,6 +25,7 @@ let UserEditor = ({ open, switchUserDialog, updateUser, createUser, handleSubmit
         <RaisedButton style={{ marginRight: 10 }} label="Cancel" disabled={status.pending} primary={true} onTouchTap={switchUserDialog} />,
         <RaisedButton
             label={_id ? 'Update' : 'Create'}
+            className="UserEditor-Success"
             disabled={status.pending || !valid}
             primary={true}
             keyboardFocused={true}
